@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import Header from '../../components/Header';
+import Container from '../../components/Container';
 
 const Home = () => (
-  <React.Fragment>
-    <h1 className="bg-red">red</h1>
-    <p className="bg-green">theme</p>
-    <p className="bg-gray">gray</p>
-  </React.Fragment>
+  <Fragment>
+    <Header />
+    <Container>
+      <button className="btn bg-theme" type="button">Novo cliente</button>
+    </Container>
+  </Fragment>
 );
 
 export default Home;
