@@ -24,7 +24,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 if (env.REACT_APP_STAGE !== 'production') {
   store = createStore(reducers,
     composeEnhancers(
-      applyMiddleware(logger, thunk),
+      applyMiddleware(thunk, logger),
     ));
 } else {
   store = createStore(reducers,
