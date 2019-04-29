@@ -1,4 +1,4 @@
-$colors: ( theme #e29933, black #333333, gray #d2d2d2, yellow #d2a710, green #49ad5b, red #d6323f )
+$colors: ( theme: #e29933, black: #333333, gray: #d2d2d2, yellow: #d2a710, green: #49ad5b, red: #d6323f )
 
 @function set-notification-text-color($colorItem)
   @if (lightness($colorItem) > 60)
@@ -10,3 +10,9 @@ $colors: ( theme #e29933, black #333333, gray #d2d2d2, yellow #d2a710, green #49
   .bg-#{nth($color, 1)}
     background-color: nth($color, 2)
     color: set-notification-text-color(nth($color, 2))
+
+@function color($key)
+  @if map-has-key($colors, $key)
+    @return map-get($colors, $key)
+  @warn "Unknown `#{$key}` in $colors."
+  @return null
