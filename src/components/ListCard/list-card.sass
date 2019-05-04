@@ -1,0 +1,36 @@
+@import '../../assets/styles/resolutions'
+
+.listStyle
+  list-style: none
+
+  li
+    border: 1px solid #eaeaea
+    padding: 20px
+    display: flex
+    align-items: center
+    flex-wrap: wrap
+
+
+    & + li
+      margin-top: 27px
+
+    div
+      flex: 0 0 28.666%
+      max-width: 28.666%
+
+      @include device(tablet)
+        flex: 0 0 33%
+        max-width: 33%
+
+      @include device(small-tablet)
+        flex: 0 0 100%
+        max-width: 100%
+
+      &:last-child
+        flex: 0 0 14%
+        max-width: 14%
+
+        @include device(tablet)
+          flex: 0 0 100%
+          max-width: 100%
+          margin-top: 10px
