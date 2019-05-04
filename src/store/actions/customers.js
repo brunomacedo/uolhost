@@ -1,4 +1,4 @@
-import { APIResquest } from '../utils/api';
+import { APIResquest } from '../../utils/api';
 
 export const GET_CUSTOMERS = 'GET_CUSTOMERS';
 export const FETCH_ERROR = 'FETCH_ERROR';
@@ -9,8 +9,8 @@ export function loadCustomers() {
       uri: 'customers',
       method: 'GET',
     })
-      .then(res => dispatch({
-        type: GET_CUSTOMERS, payload: res,
+      .then(({ data }) => dispatch({
+        type: GET_CUSTOMERS, payload: data,
       }))
       .catch(err => dispatch({ type: FETCH_ERROR, payload: err }));
   };
