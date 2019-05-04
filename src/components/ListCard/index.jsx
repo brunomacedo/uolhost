@@ -15,7 +15,7 @@ const ListCard = ({ list }) => (
         );
       })
     ) : (
-      <li>Carregando...</li>
+      <li>Nenhum item disponível...</li>
     )
   }
   </ul>
