@@ -6,15 +6,23 @@ import userIcon from '../../assets/images/user.png';
 import Container from '../../components/Container';
 import { loadCustomers } from '../../store/actions/customers';
 import ListCard from '../../components/ListCard';
+import Loading from '../../components/Loading';
 
 class Home extends Component {
-  componentDidMount() {
+  state = {
+    loading: true,
+  }
+
+  async componentDidMount() {
     const { loadCustomers: propsLoadCustomers } = this.props;
-    propsLoadCustomers();
+    await propsLoadCustomers();
+    await this.setState({ loading: false });
   }
 
   render() {
     const { customers } = this.props;
+    const { loading } = this.state;
+
     return (
       <Container
         header={{
@@ -31,7 +39,11 @@ class Home extends Component {
           },
         }}
       >
-        <ListCard list={customers} />
+        {!loading ? (
+          <ListCard list={customers} />
+        ) : (
+          <Loading />
+        )}
       </Container>
     );
   }
