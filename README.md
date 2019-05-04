@@ -1,6 +1,6 @@
 # UOLHOST Test Resolution
 
-This test has been solving using **React**
+This test has been solved using **React**
 
 
 ## Pre-requisite
