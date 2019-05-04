@@ -1,8 +1,25 @@
 .btn
+  border-radius: 0.3rem
   padding: 0.6rem 1rem
+  width: 100%
   max-width: 8rem
   display: inline-block
   vertical-align: middle
+  cursor: pointer
   line-height: 1.2
+  font-size: 1rem
+  font-weight: 400
   border: 0
-  border-radius: 0.2rem
+  background-color: #555
+  color: #fff
+
+  &:hover, &:active, &:focus
+    background-color: darken(#555, 10)
+
+  @each $color in $colors
+    &--#{nth($color, 1)}
+      background-color: nth($color, 2)
+      color: set-notification-text-color(nth($color, 2))
+
+      &:hover, &:active, &:focus
+        background-color: darken(nth($color, 2), 10)
