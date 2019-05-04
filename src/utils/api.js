@@ -44,4 +44,4 @@ export const APIResquest = (config) => {
   return promiseResquestAPI();
 };
 
-export default { API, APIResquest };
+export default { APIResquest };
