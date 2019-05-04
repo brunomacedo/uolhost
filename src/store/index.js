@@ -2,6 +2,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+
+import { loadStorage, saveStorage } from '../utils/localStorage';
 import reducers from './reducers';
 import { env } from '../utils/variables';
 
@@ -9,8 +11,11 @@ import { env } from '../utils/variables';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 /* eslint-enable */
 
+const persistedState = loadStorage();
+
 const store = createStore(
   reducers,
+  persistedState,
   composeEnhancers(
     applyMiddleware(
       thunk,
@@ -18,5 +23,7 @@ const store = createStore(
     ),
   ),
 );
+
+store.subscribe(() => saveStorage(store.getState()));
 
 export default store;
