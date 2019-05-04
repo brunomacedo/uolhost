@@ -8,6 +8,7 @@ const HeaderPage = (props) => {
     component: Component,
     ...rest
   } = props;
+
   return (
     <Component {...rest} className="page-title">
       {icon && <span className="icon-background" style={{ backgroundImage: `url(${icon})` }} />}
