@@ -12,7 +12,7 @@ const MainRouters = () => (
       <Route exact path="/clientes" component={Customers} />
       <Route exact path="/clientes/:id" component={CustomersForm} />
       <Route exact path="/clientes/novo" component={CustomersForm} />
-      <Route render={() => <Redirect to="/clientes" />} />
+      <Redirect to="/clientes" />
       {/* <Route component={NotFoundPage} /> */}
     </Switch>
   </BrowserRouter>
