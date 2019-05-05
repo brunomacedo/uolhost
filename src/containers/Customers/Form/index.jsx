@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './form.sass';
 
 import userIcon from '../../../assets/images/user.png';
+import arrow from '../../../assets/images/arrow.png';
 import Container from '../../../components/Container';
 import { loadCustomers } from '../../../store/actions/customers';
 import Loading from '../../../components/Loading';
@@ -103,21 +104,27 @@ class CustomersForm extends Component {
             <input value={email} name="email" onChange={this.onHandleChangeLevel} placeholder="E-mail" type="text" />
             <input value={cpf} name="cpf" onChange={this.onHandleChangeOne} placeholder="CPF" type="text" />
             <input value={tel} name="tel" onChange={this.onHandleChangeLevel} placeholder="Telefone" type="text" />
-            <select name="status" value={status} onChange={this.onHandleChangeOne}>
-              <option value="Ativo">Ativo</option>
-              <option value="Inativo">Inativo</option>
-              <option value="Aguardando ativação">Aguardando ativação</option>
-              <option value="Desativado">Desativado</option>
-            </select>
-            <button
-              type="submit"
-              className="btn btn--theme"
-            >
-              {editing ? 'Salvar' : 'Criar'}
-            </button>
-            <Link to="/" className="btn btn--white">
-              Voltar
-            </Link>
+            <div className="selectForm">
+              <select name="status" value={status} onChange={this.onHandleChangeOne}>
+                <option>Status</option>
+                <option value="Ativo">Ativo</option>
+                <option value="Inativo">Inativo</option>
+                <option value="Aguardando ativação">Aguardando ativação</option>
+                <option value="Desativado">Desativado</option>
+              </select>
+              <img src={arrow} alt="" />
+            </div>
+            <footer className="buttons">
+              <button
+                type="submit"
+                className="btn btn--theme"
+              >
+                {editing ? 'Salvar' : 'Criar'}
+              </button>
+              <Link to="/" className="btn btn--white">
+                Voltar
+              </Link>
+            </footer>
           </form>
         ) : (
           <Loading />

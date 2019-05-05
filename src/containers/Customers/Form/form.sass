@@ -1,3 +1,45 @@
+@import '../../../assets/styles/colors'
+
 .page-form
-  input
+  input, select
+    background: none
+    border-radius: 0.3rem
+    border: 1px solid color(gray)
+    color: color(black)
     display: block
+    font-size: 1rem
+    font-weight: 300
+    max-width: 18rem
+    padding: 1rem
+    user-select: none
+    width: 100%
+    -moz-appearance: none
+    -webkit-appearance: none
+
+    & + input,
+    & + select,
+      margin-top: 1rem
+
+  select
+    cursor: pointer
+
+  .buttons
+    margin-top: 2rem
+
+    .btn
+      & + .btn
+        margin-left: 1rem
+
+  .selectForm
+    position: relative
+    margin-top: 1rem
+    max-width: 18rem
+    width: 100%
+
+    img
+      position: absolute
+      pointer-events: none
+      right: 10px
+      top: calc(50% - 10px)
+      width: 20px
+      height: 20px
