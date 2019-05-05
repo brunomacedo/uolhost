@@ -30,12 +30,13 @@ const SubHeaderPage = (props) => {
 SubHeaderPage.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
-  button: PropTypes.instanceOf(Object).isRequired,
+  button: PropTypes.instanceOf(Object),
 };
 
 SubHeaderPage.defaultProps = {
   title: String(),
   description: String(),
+  button: null,
 };
 
 export default SubHeaderPage;
