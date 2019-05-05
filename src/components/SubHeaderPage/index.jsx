@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './sub-header-page.sass';
 
@@ -16,12 +17,21 @@ const SubHeaderPage = (props) => {
         {description && <h3>{description}</h3>}
       </header>
       {button && (
-        <button
-          className={`btn ${button.classes}`}
-          type="button"
-        >
-          {button.text}
-        </button>
+        button.link ? (
+          <Link
+            className={`btn ${button.classes}`}
+            to={button.link}
+          >
+            {button.text}
+          </Link>
+        ) : (
+          <button
+            className={`btn ${button.classes}`}
+            type="button"
+          >
+            {button.text}
+          </button>
+        )
       )}
     </article>
   );
