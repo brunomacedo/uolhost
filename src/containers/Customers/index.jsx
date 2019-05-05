@@ -36,6 +36,7 @@ class Home extends Component {
           button: {
             text: 'Novo cliente',
             classes: 'btn--theme',
+            link: '/clientes/novo',
           },
         }}
       >

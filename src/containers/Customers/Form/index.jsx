@@ -26,14 +26,18 @@ class CustomersForm extends Component {
   }
 
   async componentDidMount() {
-    const { loadCustomers: propLoadCustomers } = this.props;
-    await propLoadCustomers();
+    const { customers, loadCustomers: propsLoadCustomers } = this.props;
+
+    if (customers.length === 0) {
+      await propsLoadCustomers();
+    }
+
     await this.setState({ loading: false });
     await this.onPageLoad();
   }
 
   onPageLoad = () => {
-    const { match, customers } = this.props;
+    const { customers, match, history } = this.props;
 
     const customer = customers.find(({ _id }) => (
       _id.toString() === match.params.id.toString()
@@ -44,6 +48,8 @@ class CustomersForm extends Component {
         editing: true,
         customer,
       });
+    } else {
+      history.push('/clientes/novo');
     }
   }
 
@@ -123,6 +129,7 @@ class CustomersForm extends Component {
 
 CustomersForm.propTypes = {
   match: PropTypes.instanceOf(Object).isRequired,
+  history: PropTypes.instanceOf(Object).isRequired,
   customers: PropTypes.instanceOf(Object).isRequired,
   loadCustomers: PropTypes.func.isRequired,
 };
