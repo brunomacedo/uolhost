@@ -15,16 +15,20 @@ const Container = (props) => {
       <section className="container">
         <HeaderPage {...header} />
         <SubHeaderPage {...subHeader} />
-        {children}
+        {typeof children !== 'undefined' && children}
       </section>
     </Fragment>
   );
 };
 
 Container.propTypes = {
-  children: PropTypes.instanceOf(Object).isRequired,
+  children: PropTypes.instanceOf(Object),
   header: PropTypes.instanceOf(Object).isRequired,
   subHeader: PropTypes.instanceOf(Object).isRequired,
+};
+
+Container.defaultProps = {
+  children: null,
 };
 
 export default Container;
