@@ -14,8 +14,12 @@ class Home extends Component {
   }
 
   async componentDidMount() {
-    const { loadCustomers: propsLoadCustomers } = this.props;
-    await propsLoadCustomers();
+    const { customers, loadCustomers: propsLoadCustomers } = this.props;
+
+    if (customers.length === 0) {
+      await propsLoadCustomers();
+    }
+
     await this.setState({ loading: false });
   }
 
