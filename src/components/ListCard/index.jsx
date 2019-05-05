@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './list-card.sass';
 import withStyles from 'react-jss';
@@ -48,7 +49,12 @@ const ListCard = ({ list, classes }) => (
                 {status}
               </div>
               <div>
-                <button className="btn btn--theme" type="button">Editar</button>
+                <Link
+                  to={`/clientes/${itemId}`}
+                  className="btn btn--white"
+                >
+                  Editar
+                </Link>
               </div>
             </li>
           );
