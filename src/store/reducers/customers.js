@@ -1,4 +1,9 @@
-import { GET_CUSTOMERS, FETCH_ERROR } from '../actions/customers';
+import {
+  GET_CUSTOMERS,
+  ADD_CUSTOMER,
+  UPDATE_CUSTOMER,
+  FETCH_ERROR,
+} from '../actions/customers';
 
 const INITIAL_STATE = {
   customers: [],
@@ -11,6 +16,26 @@ export default function (state = INITIAL_STATE, { type, payload }) {
       return {
         ...state,
         customers: payload,
+        fetchError: '',
+      };
+    case ADD_CUSTOMER:
+      return {
+        ...state,
+        customers: [...state.customers, payload],
+        fetchError: '',
+      };
+    case UPDATE_CUSTOMER:
+      return {
+        ...state,
+        customers: [
+          ...state.customers.filter(({ _id: customerID }) => {
+            const { _id: payloadID } = payload;
+            return (
+              customerID !== payloadID
+            );
+          }),
+          payload,
+        ],
         fetchError: '',
       };
     case FETCH_ERROR:
