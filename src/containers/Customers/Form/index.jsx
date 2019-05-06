@@ -2,20 +2,26 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import uuid from 'uuid';
 
 import './form.sass';
 
 import userIcon from '../../../assets/images/user.png';
 import arrow from '../../../assets/images/arrow.png';
-import Container from '../../../components/Container';
-import { loadCustomers } from '../../../store/actions/customers';
 import Loading from '../../../components/Loading';
+import Container from '../../../components/Container';
+import {
+  loadCustomers,
+  addCustomer,
+  updateCustomer,
+} from '../../../store/actions/customers';
 
 class CustomersForm extends Component {
   state = {
     editing: false,
     loading: true,
     customer: {
+      _id: String(),
       name: String(),
       cpf: String(),
       contact: {
@@ -51,6 +57,12 @@ class CustomersForm extends Component {
       });
     } else {
       history.push('/clientes/novo');
+      this.setState(prevState => ({
+        customer: {
+          ...prevState.customer,
+          _id: uuid(),
+        },
+      }));
     }
   }
 
@@ -79,6 +91,28 @@ class CustomersForm extends Component {
     }));
   }
 
+  onHandleSubmit = (e) => {
+    e.preventDefault();
+    const {
+      addCustomer: propsAddCustomer,
+      updateCustomer: propsUpdateCustomer,
+      history,
+    } = this.props;
+    const { customer, editing } = this.state;
+    const { _id: itemID } = customer;
+
+    if (!editing) {
+      propsAddCustomer(customer);
+      history.push(`/clientes/${itemID}`);
+      this.setState({
+        editing: true,
+        loading: false,
+      });
+    } else {
+      propsUpdateCustomer(customer);
+    }
+  }
+
   render() {
     const { loading, editing, customer } = this.state;
     const {
@@ -99,7 +133,7 @@ class CustomersForm extends Component {
         }}
       >
         {!loading ? (
-          <form className="page-form" onSubmit={e => e.preventDefault()}>
+          <form className="page-form" onSubmit={this.onHandleSubmit}>
             <input value={name} name="name" onChange={this.onHandleChangeOne} placeholder="Nome" type="text" />
             <input value={email} name="email" onChange={this.onHandleChangeLevel} placeholder="E-mail" type="text" />
             <input value={cpf} name="cpf" onChange={this.onHandleChangeOne} placeholder="CPF" type="text" />
@@ -139,6 +173,8 @@ CustomersForm.propTypes = {
   history: PropTypes.instanceOf(Object).isRequired,
   customers: PropTypes.instanceOf(Object).isRequired,
   loadCustomers: PropTypes.func.isRequired,
+  addCustomer: PropTypes.func.isRequired,
+  updateCustomer: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -146,5 +182,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  loadCustomers,
+  loadCustomers, addCustomer, updateCustomer,
 })(CustomersForm);
