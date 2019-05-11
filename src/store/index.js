@@ -13,13 +13,18 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const persistedState = loadStorage();
 
+const middlewares = [];
+if (env.REACT_APP_STAGE === 'development') {
+  middlewares.push(logger);
+}
+
 const store = createStore(
   reducers,
   persistedState,
   composeEnhancers(
     applyMiddleware(
       thunk,
-      env.REACT_APP_STAGE !== 'production' ? logger : null,
+      ...middlewares,
     ),
   ),
 );
