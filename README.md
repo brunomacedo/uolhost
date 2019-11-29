@@ -1,4 +1,4 @@
-# UOLHOST Test Resolution
+# UOLHOST Test
 
 This test has been solved using **React**
 
